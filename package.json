@@ -1,10 +1,10 @@
 {
-  "name": "freppify",
+  "name": "vacdecweb",
   "version": "1.0.0",
-  "description": "FrP Meme Generator",
+  "description": "vaccine decoder web interface",
   "main": "index.js",
   "engines": {
-    "node": "10.15.3"
+    "node": "14"
   },
   "scripts": {
     "start": "node index.js",
@@ -12,14 +12,13 @@
   },
   "keywords": [],
   "author": "damsleth",
-  "license": "ISC",
+  "license": "WTFPL",
   "dependencies": {
-    "ejs": "^2.6.1",
-    "esm": "^3.2.22",
-    "express": "^4.16.4",
-    "image-downloader": "^3.5.0",
-    "jimp": "^0.6.7",
-    "multer": "^1.4.2",
+    "ejs": "^3.1.6",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "image-downloader": "^4.0.3",
+    "multer": "^1.4.3",
     "once": "^1.4.0",
     "serve-favicon": "^2.5.0"
   }
