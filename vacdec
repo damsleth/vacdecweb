@@ -9,7 +9,7 @@ import argparse
 import logging
 from typing import Dict, Tuple, Optional
 
-import PIL.Image
+from PIL import Image
 import pyzbar.pyzbar
 
 import json
