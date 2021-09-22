@@ -34,7 +34,7 @@ function copyQRData() {
   qrtxt.select();
   qrtxt.setSelectionRange(0, 99999); /* For mobile devices */
   navigator.clipboard.writeText(qrtxt.value);
-  document.getElementById("copydatabtn").value = "copied"
+  document.getElementById("copydatabtn").value = "Copied to clipboard"
 }
 
 (() => init())()

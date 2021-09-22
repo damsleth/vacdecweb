@@ -3,20 +3,25 @@
 
 <head>
   <title>VACDECWEB</title>
-  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/dropzone.css">
+  <link rel="stylesheet" href="css/style.css">
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
   <script src="js/dropzone.js"></script>
   <script>
     Dropzone.options.dropzone = {
+      maxFiles: 1,
       init: function () {
-
+        this.on("drop", function () {
+          this.removeAllFiles()
+          document.getElementById("qrdata").value = ""
+          document.getElementById("copydatabtn").value = "Copy JSON"
+        })
         this.on("addedfile", function (file) {
           console.log("Added file, populating url field");
-          // console.log(file)
           document.querySelector("#qrurl").value = `${document.location.href}uploads/${file.name}`;
+          decodeQR();
         });
       }
     };
@@ -47,21 +52,20 @@
       </div>
       <br />
       <br />
-      <p>
-      </p>
     </div>
   </div>
   <div class="container">
     <div class="row">
       <div id="stats">
-        <input id="qrurl" type="text" value="" /><br />
-        <label for="qrurl">URL to QR Code (or upload below)</label><br /><br />
-        <input class="btn" type="button" onclick="decodeQR()" value="DECODE"><br /><br />
         <form method="post" action="/upload" class="dropzone dz-clickable" id="dropzone" name="file">
           <div class="dz-message d-flex flex-column">
             Drag &amp; Drop QR code photo here<br>or click to upload
           </div>
-        </form>
+        </form><br /><br />
+
+        <div id="urlwrapper"><input id="qrurl" type="text" value="" /> <input class="btn" type="button" onclick="decodeQR()"
+          value="DECODE"></div><br />
+        <label for="qrurl">URL to QR Code (or upload below)</label><br /><br />
       </div>
       <div class="">
         <input type="button" value="Copy JSON" class="btn" id="copydatabtn" onclick="copyQRData()" /><br />
