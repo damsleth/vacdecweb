@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>VACDECWEB</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dropzone.css">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+  <script src="js/dropzone.js"></script>
+  <script>
+    Dropzone.options.dropzone = {
+      init: function () {
+
+        this.on("addedfile", function (file) {
+          console.log("Added file, populating url field");
+          // console.log(file)
+          document.querySelector("#qrurl").value = `${document.location.href}uploads/${file.name}`;
+        });
+      }
+    };
+    let dztemplate = `
+        <div class="dz-preview dz-file-preview">
+  <div class="dz-details">
+    <div class="dz-filename"><span data-dz-name></span></div>
+    <div class="dz-size" data-dz-size></div>
+    <img data-dz-thumbnail />
+  </div>
+  <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+  <div class="dz-success-mark"><span>✔</span></div>
+  <div class="dz-error-message"><span data-dz-errormessage></span></div>
+</div>
+        `
+  </script>
+</head>
+
+<body class="">
+  <div class="container">
+    <img id="logo" src="img/logo.png" />
+    <div id="hero">
+      <em>Vaccine Passport Decoder</em>
+      <div id="darkmodeswitch"> <span>🌛</span>
+        <span><label class="switch" style="top:2px;left:3px;">
+            <input id="darkmodetoggle" type="checkbox" onclick="toggleDarkMode()">
+            <span class="slider round"></span></label></span>
+      </div>
+      <br />
+      <br />
+      <p>
+      </p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div id="stats">
+        <input id="qrurl" type="text" value="" /><br />
+        <label for="qrurl">URL to QR Code (or upload below)</label><br /><br />
+        <input class="btn" type="button" onclick="decodeQR()" value="DECODE"><br /><br />
+        <form method="post" action="/upload" class="dropzone dz-clickable" id="dropzone" name="file">
+          <div class="dz-message d-flex flex-column">
+            Drag &amp; Drop QR code photo here<br>or click to upload
+          </div>
+        </form>
+      </div>
+      <div class="">
+        <input type="button" value="Copy JSON" class="btn" id="copydatabtn" onclick="copyQRData()" /><br />
+        <textarea disabled="disabled" id="qrdata">decoded QR code data goes here</textarea>
+      </div>
+    </div>
+  </div>
+  <script src="js/vacdecweb.js"></script>
+</body>
+
+</html>

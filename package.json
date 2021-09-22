@@ -1,0 +1,26 @@
+{
+  "name": "freppify",
+  "version": "1.0.0",
+  "description": "FrP Meme Generator",
+  "main": "index.js",
+  "engines": {
+    "node": "10.15.3"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "prod": "NODE_ENV=production node index.js"
+  },
+  "keywords": [],
+  "author": "damsleth",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "esm": "^3.2.22",
+    "express": "^4.16.4",
+    "image-downloader": "^3.5.0",
+    "jimp": "^0.6.7",
+    "multer": "^1.4.2",
+    "once": "^1.4.0",
+    "serve-favicon": "^2.5.0"
+  }
+}
