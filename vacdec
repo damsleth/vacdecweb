@@ -9,7 +9,7 @@ import argparse
 import logging
 from typing import Dict, Tuple, Optional
 
-import PIL.Image
+from PIL import Image
 import pyzbar.pyzbar
 
 import json
@@ -291,7 +291,7 @@ def main() -> None:
         image_file = args.image_file
 
     if image_file:
-        data = pyzbar.pyzbar.decode(PIL.Image.open(image_file))
+        data = pyzbar.pyzbar.decode(Image.open(image_file))
         covid_cert_data = data[0].data.decode()
     elif args.raw_string:
         covid_cert_data = args.raw_string
