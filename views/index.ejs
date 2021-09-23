@@ -15,8 +15,7 @@
       init: function () {
         this.on("drop", function () {
           this.removeAllFiles()
-          document.getElementById("qrdata").value = ""
-          document.getElementById("copydatabtn").value = "Copy JSON"
+          imageDropped();
         })
         this.on("addedfile", function (file) {
           console.log("Added file, populating url field");
@@ -63,12 +62,13 @@
           </div>
         </form><br /><br />
 
-        <div id="urlwrapper"><input id="qrurl" type="text" value="" /> <input class="btn" type="button" onclick="decodeQR()"
-          value="DECODE"></div><br />
+        <div id="urlwrapper"><input id="qrurl" type="text" value="" /> <input class="btn" type="button"
+            onclick="decodeQR()" value="DECODE"></div><br />
         <label for="qrurl">URL to QR Code (or upload below)</label><br /><br />
       </div>
       <div class="">
         <input type="button" value="Copy JSON" class="btn" id="copydatabtn" onclick="copyQRData()" /><br />
+        <img src="/img/working.gif" id="spinner" />
         <textarea disabled="disabled" id="qrdata">decoded QR code data goes here</textarea>
       </div>
     </div>

@@ -199,3 +199,8 @@ input:checked+.slider:before {
   display: flex;
   flex-grow: 1;
 }
+
+#spinner{
+  display: none;
+  margin-left: 20%;
+}

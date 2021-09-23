@@ -1,40 +1,74 @@
 function init() {
-    if (localStorage["darkmode"] == "true") {
-        document.body.classList.toggle('darkmode')
-        document.getElementById("darkmodetoggle").setAttribute("checked", "checked")
-    }
+  if (localStorage["darkmode"] == "true") {
+    document.body.classList.toggle('darkmode')
+    document.getElementById("darkmodetoggle").setAttribute("checked", "checked")
+  }
+}
+
+function imageDropped() {
+  document.getElementById("qrdata").value = ""
+  document.getElementById("copydatabtn").value = "Copy JSON"
+  document.getElementById("spinner").style.display = "block"
 }
 
 async function decodeQR() {
-    let imgUrl = document.getElementById("qrurl")["value"];
-    if (!imgUrl && !isLocalImage(imgUrl)) {
-        let localImgUrl = await getImageURL(imgUrl)
-        if (localImgUrl) imgUrl = localImgUrl
-    }
-    let QRJSON = await fetch(`/decodeImage?url=${imgUrl}`).then(res => res.text())
-    document.getElementById("qrdata").value=QRJSON
-    document.getElementById("copydatabtn").style.display="inline"
+  let imgUrl = document.getElementById("qrurl")["value"]
+  if (!imgUrl && !isLocalImage(imgUrl)) {
+    let localImgUrl = await getImageURL(imgUrl)
+    if (localImgUrl) imgUrl = localImgUrl
+  }
+  let QRJSON = await fetch(`/decodeImage?url=${imgUrl}`).then(res => res.text())
+  doneDecoding(QRJSON)
+}
+
+function doneDecoding(qrjson) {
+  document.getElementById("qrdata").value = qrjson
+  document.getElementById("spinner").style.display = "none"
+  document.getElementById("copydatabtn").style.display = "inline"
 }
 
 function isLocalImage(url) {
-    return url.startsWith(document.location.href)
+  return url.startsWith(document.location.href)
 }
 
 async function getImageURL(url) {
-    return fetch(`/getImage?url=${url}`).then(res => res.json().then(img => img["path"]))
+  return fetch(`/getImage?url=${url}`).then(res => res.json().then(img => img["path"]))
 }
 
 function toggleDarkMode() {
-    document.body.classList.toggle('darkmode');
-    localStorage["darkmode"] == "true" ? localStorage["darkmode"] = "false" : localStorage["darkmode"] = "true"
+  document.body.classList.toggle('darkmode')
+  localStorage["darkmode"] == "true" ? localStorage["darkmode"] = "false" : localStorage["darkmode"] = "true"
 };
 
 function copyQRData() {
-  let qrtxt = document.getElementById("qrdata");
-  qrtxt.select();
-  qrtxt.setSelectionRange(0, 99999); /* For mobile devices */
-  navigator.clipboard.writeText(qrtxt.value);
+  let qrtxt = document.getElementById("qrdata")
+  qrtxt.select()
+  qrtxt.setSelectionRange(0, 99999) /* For mobile devices */
+  navigator.clipboard.writeText(qrtxt.value)
+  iosCopyToClipboard(qrtxt)
   document.getElementById("copydatabtn").value = "Copied to clipboard"
+}
+
+
+function iosCopyToClipboard(el) {
+  var oldContentEditable = el.contentEditable,
+    oldReadOnly = el.readOnly,
+    range = document.createRange()
+
+  el.contentEditable = true
+  el.readOnly = false
+  range.selectNodeContents(el)
+
+  var s = window.getSelection()
+  s.removeAllRanges()
+  s.addRange(range)
+
+  el.setSelectionRange(0, 999999) // A big number, to cover anything that could be inside the element.
+
+  el.contentEditable = oldContentEditable
+  el.readOnly = oldReadOnly
+
+  document.execCommand('copy')
 }
 
 (() => init())()

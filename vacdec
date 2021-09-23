@@ -10,6 +10,8 @@ import logging
 from typing import Dict, Tuple, Optional
 
 from PIL import Image
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 import pyzbar.pyzbar
 
 import json
