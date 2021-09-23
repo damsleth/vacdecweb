@@ -7,8 +7,7 @@
     "node": "14"
   },
   "scripts": {
-    "start": "./vacdec ; pipenv install Pillow ; node index.js",
-    "prod": "NODE_ENV=production node index.js"
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "damsleth",

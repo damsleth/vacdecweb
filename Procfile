@@ -1,1 +1,1 @@
-web: node ./index.js
+web: pipenv install Pillow ; node ./index.js
