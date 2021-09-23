@@ -61,13 +61,11 @@
             Drag &amp; Drop QR code photo here<br>or click to upload
           </div>
         </form><br /><br />
-
         <div id="urlwrapper"><input id="qrurl" type="text" value="" /> <input class="btn" type="button"
             onclick="decodeQR()" value="DECODE"></div>
         <label for="qrurl">URL to QR Code (or upload above)</label><br /><br />
       </div>
-      <div class="">
-        <input type="button" value="Copy JSON" class="btn" id="copydatabtn" onclick="copyQRData()" /><br /><br />
+      <div>
         <img src="/img/working.gif" id="spinner" />
         <textarea disabled="disabled" id="qrdata"></textarea>
       </div>

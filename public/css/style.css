@@ -35,6 +35,10 @@ input {
   height: 700px;
 }
 
+label{
+  font-size: 12px;
+}
+
 #qrurl {
   display: flex;
   width: 100%;
