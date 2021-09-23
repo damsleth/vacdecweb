@@ -13,7 +13,7 @@ ecdsa==0.17.0
 idna==3.2
 numpy==1.21.1
 oscrypto==1.2.1
-Pillow==8.3.2
+Pillow==*
 pycparser==2.20
 pyzbar==0.1.8
 readerwriterlock==1.0.8

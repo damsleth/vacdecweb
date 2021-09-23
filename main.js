@@ -63,13 +63,8 @@ app.get('/decodeImage', async (req, res) => {
       py.stdout.on('data', (data) => { output += data.toString() })
       py.stderr.on('data', (data) => { console.log('error:' + data) })
       py.stdout.on('end', async function (code) {
-        if (!code) {
-          console.log("no usable QR data found")
-          resolve("ERROR: no usable QR data found - try another image")
-        } else {
           console.log("finished")
           resolve(output)
-        }
       })
       once(py, 'close')
       return
