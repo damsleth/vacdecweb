@@ -7,9 +7,8 @@
     "node": "14"
   },
   "scripts": {
-    "start": "node index.js",
-    "prod": "NODE_ENV=production node index.js",
-    "heroku-postbuild": "./vacdec ; pipenv install Pillow"
+    "start": "./vacdec ; pipenv install Pillow ; node index.js",
+    "prod": "NODE_ENV=production node index.js"
   },
   "keywords": [],
   "author": "damsleth",
