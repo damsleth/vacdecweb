@@ -42,5 +42,8 @@ function toggleDarkMode() {
   localStorage["darkmode"] == "true" ? localStorage["darkmode"] = "false" : localStorage["darkmode"] = "true"
 };
 
+document.getElementById("dropzone").addEventListener("click",(function(){
+  Dropzone.forElement("#dropzone").removeAllFiles(true);
+}))
 
 (() => init())()
