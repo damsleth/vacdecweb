@@ -22,9 +22,11 @@ async function decodeQR() {
 }
 
 function doneDecoding(qrjson) {
-  document.getElementById("qrdata").value = qrjson
   document.getElementById("spinner").style.display = ""
-  if (!qrjson.startsWith("ERROR")) {
+  if (!qrjson) {
+    document.getElementById("qrdata").value = "Error decoding image - are you sure there's a vaccine passport QR code in this photo?"
+  } else {
+    document.getElementById("qrdata").value = qrjson
     document.getElementById("copydatabtn").style.display = "inline"
   }
 }
