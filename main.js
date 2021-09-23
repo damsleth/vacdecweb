@@ -76,4 +76,4 @@ app.get('/decodeImage', async (req, res) => {
 app.get('(/*)?', (_req, res) => res.render("404"))
 
 // Start App
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`VACDECWEB running, listening on port ${port}!`))

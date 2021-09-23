@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node index.js",
     "prod": "NODE_ENV=production node index.js",
-    "heroku-postbuild": "pipenv install Pillow"
+    "heroku-postbuild": "./vacdec && pipenv install Pillow"
   },
   "keywords": [],
   "author": "damsleth",
