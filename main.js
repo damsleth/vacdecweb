@@ -23,12 +23,12 @@ app.get('/', (_req, res) => { res.render("index") })
 app.get('/getImage', (req, res) => {
   let imageUrl = req.query.url
   if (!imageUrl) { return }
-  let memeFileName = `/memes/${new Date().getTime()}.jpg`
+  let imageFileName = `/memes/${new Date().getTime()}.jpg`
   let opts = {
     url: imageUrl,
-    dest: `public/${memeFileName}`
+    dest: `public/${imageFileName}`
   }
-  download.image(opts).then(() => res.json({ path: memeFileName }))
+  download.image(opts).then(() => res.json({ path: imageFileName }))
 })
 
 
@@ -63,8 +63,13 @@ app.get('/decodeImage', async (req, res) => {
       py.stdout.on('data', (data) => { output += data.toString() })
       py.stderr.on('data', (data) => { console.log('error:' + data) })
       py.stdout.on('end', async function (code) {
-        console.log("finished")
-        resolve(output)
+        if (!code) {
+          console.log("no usable QR data found")
+          resolve("ERROR: no usable QR data found - try another image")
+        } else {
+          console.log("finished")
+          resolve(output)
+        }
       })
       once(py, 'close')
       return

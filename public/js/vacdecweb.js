@@ -8,7 +8,7 @@ function init() {
 function imageDropped() {
   document.getElementById("qrdata").value = ""
   document.getElementById("copydatabtn").value = "Copy JSON"
-  document.getElementById("spinner").style.display = "block"
+  document.getElementById("spinner").style.display = "inline"
 }
 
 async function decodeQR() {
@@ -23,8 +23,10 @@ async function decodeQR() {
 
 function doneDecoding(qrjson) {
   document.getElementById("qrdata").value = qrjson
-  document.getElementById("spinner").style.display = "none"
-  document.getElementById("copydatabtn").style.display = "inline"
+  document.getElementById("spinner").style.display = ""
+  if (!qrjson.startsWith("ERROR")) {
+    document.getElementById("copydatabtn").style.display = "inline"
+  }
 }
 
 function isLocalImage(url) {
@@ -47,6 +49,7 @@ function copyQRData() {
   navigator.clipboard.writeText(qrtxt.value)
   iosCopyToClipboard(qrtxt)
   document.getElementById("copydatabtn").value = "Copied to clipboard"
+  clearSelection()
 }
 
 
@@ -69,6 +72,11 @@ function iosCopyToClipboard(el) {
   el.readOnly = oldReadOnly
 
   document.execCommand('copy')
+}
+
+function clearSelection() {
+  if (window.getSelection) { window.getSelection().removeAllRanges() }
+  else if (document.selection) { document.selection.empty() }
 }
 
 (() => init())()

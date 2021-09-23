@@ -46,7 +46,8 @@ input {
 
 #logo {
   max-width: 100%;
-  filter: invert(1)
+  filter: invert(1);
+  zoom:0.5;
 }
 
 .hero-unit h1,
@@ -202,5 +203,4 @@ input:checked+.slider:before {
 
 #spinner{
   display: none;
-  margin-left: 20%;
 }

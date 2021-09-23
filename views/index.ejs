@@ -41,9 +41,9 @@
 
 <body class="">
   <div class="container">
-    <img id="logo" src="img/logo.png" />
+    <a href="/"><img id="logo" src="img/logo.png" /></a>
     <div id="hero">
-      <em>Vaccine Passport Decoder</em>
+      <em>Vaccine Passport Decoder - cobbled together by <a href="https://github.com/damsleth" target="_blank">@damsleth</a></em>
       <div id="darkmodeswitch"> <span>🌛</span>
         <span><label class="switch" style="top:2px;left:3px;">
             <input id="darkmodetoggle" type="checkbox" onclick="toggleDarkMode()">
@@ -63,13 +63,13 @@
         </form><br /><br />
 
         <div id="urlwrapper"><input id="qrurl" type="text" value="" /> <input class="btn" type="button"
-            onclick="decodeQR()" value="DECODE"></div><br />
-        <label for="qrurl">URL to QR Code (or upload below)</label><br /><br />
+            onclick="decodeQR()" value="DECODE"></div>
+        <label for="qrurl">URL to QR Code (or upload above)</label><br /><br />
       </div>
       <div class="">
-        <input type="button" value="Copy JSON" class="btn" id="copydatabtn" onclick="copyQRData()" /><br />
+        <input type="button" value="Copy JSON" class="btn" id="copydatabtn" onclick="copyQRData()" /><br /><br />
         <img src="/img/working.gif" id="spinner" />
-        <textarea disabled="disabled" id="qrdata">decoded QR code data goes here</textarea>
+        <textarea disabled="disabled" id="qrdata"></textarea>
       </div>
     </div>
   </div>
