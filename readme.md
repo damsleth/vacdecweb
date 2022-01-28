@@ -3,7 +3,7 @@
 A Frontend for [vacdec]((https://github.com/hannob/vacdec)), an EU COVID19 passport QR code decoder written in python by Hanno Böck.  
 The webapp itself uses nodejs and express, and allows you to upload a photo of your QR code and get the JSON data contents in return  
 
-A live version can be found on [http://vacdec.damsleth.no](http://vacdec.damsleth.no)
+A live version can be found on [http://vacdec.damsleth.no](http://vacdec.damsleth.no) (cold starts, first load takes about 30 seconds)
 
 ## prerequisites
 
