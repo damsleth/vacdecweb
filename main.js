@@ -33,7 +33,7 @@ app.get('/getImage', (req, res) => {
 
 
 // upload file route with handling of non-images
-app.post('(/upload)', upload.single("file"), (req, res, next) => {
+app.post('(/upload)', upload.single("file"), (req, res) => {
   if (!req.file.mimetype.startsWith('image/')) {
     return res.status(422).json({ error: 'The uploaded file must be an image' })
   }
@@ -47,30 +47,49 @@ app.get('/decodeImage', async (req, res) => {
   console.log(`decoding ${imgUrl}`)
   // hack, only support uploading images so they're all in the uploads folder
   let upImgUrl = `./public${imgUrl.substring(imgUrl.indexOf("/uploads"))}`
-  let imgData = await getQR(upImgUrl)
+  let imgData = await getQrPython(upImgUrl)
   res.status(200)
   res.send(imgData)
   res.end()
-
-  function getQR(url) {
-    return new Promise((resolve, reject) => {
-      console.log("getQR triggered")
-      console.log("decoding" + url)
-      let output = ''
-      let spawn = require('child_process').spawn
-      let py = spawn('pipenv', ['run', './vacdec', `${url}`])
-      py.stdin.setEncoding = 'utf-8'
-      py.stdout.on('data', (data) => { output += data.toString() })
-      py.stderr.on('data', (data) => { console.log('error:' + data) })
-      py.stdout.on('end', async function (code) {
-          console.log("finished")
-          resolve(output)
-      })
-      once(py, 'close')
-      return
-    })
-  }
 })
+
+function getQrPython(url) {
+  return new Promise((resolve, _reject) => {
+    console.log("getQR triggered")
+    console.log("decoding" + url)
+    let output = ''
+    let spawn = require('child_process').spawn
+    let py = spawn('pipenv', ['run', './vacdec', `${url}`])
+    py.stdin.setEncoding = 'utf-8'
+    py.stdout.on('data', (data) => { output += data.toString() })
+    py.stderr.on('data', (data) => { console.log('error:' + data) })
+    py.stdout.on('end', async function (code) {
+      console.log("finished")
+      resolve(output)
+    })
+    once(py, 'close')
+    return
+  })
+}
+
+function getQrJS(url) {
+  return new Promise((resolve, _reject) => {
+    console.log("getQRJS triggered")
+    console.log("decoding" + url)
+    let output = ''
+    let spawn = require('child_process').spawn
+    let py = spawn('pipenv', ['run', './vacdec', `${url}`])
+    py.stdin.setEncoding = 'utf-8'
+    py.stdout.on('data', (data) => { output += data.toString() })
+    py.stderr.on('data', (data) => { console.log('error:' + data) })
+    py.stdout.on('end', async function (code) {
+        console.log("finished")
+        resolve(output)
+    })
+    once(py, 'close')
+    return
+  })
+}
 
 // 404 route, for all routes not hit by any other endpoints
 app.get('(/*)?', (_req, res) => res.render("404"))
